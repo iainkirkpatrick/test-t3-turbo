@@ -5,6 +5,16 @@ import { signIn, signOut } from "next-auth/react";
 
 import { api, type RouterOutputs } from "~/utils/api";
 
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/Avatar'
+import {
+	DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+	DropdownMenuItem
+} from '../components/ui/Dropdown'
+
 const PostCard: React.FC<{
   post: RouterOutputs["post"]["all"][number];
   onPostDelete?: () => void;
@@ -88,9 +98,32 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <div className="container mt-12 flex flex-col items-center justify-center gap-4 px-4 py-8">
+          <div className="flex flex-row">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> Turbo
           </h1>
+          <DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Avatar>
+								<AvatarImage src={undefined} />
+								<AvatarFallback>IK</AvatarFallback>
+							</Avatar>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align='end'>
+							<DropdownMenuLabel>test</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem className='p-0'>
+								{/* <NextLink href="/profile" className='py-1.5 px-2 w-full'> */}
+									Profile
+								{/* </NextLink> */}
+							</DropdownMenuItem>
+							<DropdownMenuItem className='p-0'>
+								{/* <Button variant="menuItem" size="sm" onClick={() => signOut({ callbackUrl: 'http://localhost:3001' })}>Log out</Button> */}
+                log out
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+          </div>
           <AuthShowcase />
 
           <CreatePostForm />
